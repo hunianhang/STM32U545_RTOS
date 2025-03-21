@@ -23,6 +23,8 @@
 #include "memorymap.h"
 #include "usart.h"
 #include "gpio.h"
+#include <stdlib.h>
+#include "debug.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -97,7 +99,8 @@ int main(void)
   MX_ICACHE_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  Debug_Println("System initialized!");
+  Debug_Println("UART Test - Baud Rate: 115200");
   /* USER CODE END 2 */
 
   MX_ThreadX_Init();
