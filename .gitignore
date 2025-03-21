@@ -1,0 +1,111 @@
+# Build and Debug directories
+Debug/
+Release/
+build/
+*.o
+*.obj
+*.d
+*.crf
+*.axf
+*.map
+*.dep
+*.lnp
+*.sct
+*.htm
+*.dep
+*.tra
+*.plg
+
+# IDE specific files
+.vscode/
+.idea/
+.settings/
+.project
+.mxproject
+*.uvgui.*
+*.uvgui
+*.uvopt
+*.uvoptx
+*.uvproj
+*.uvprojx
+*.uvgui.*.username
+*.uvgui.*.dep
+*.uvgui.*.bak
+*.uvgui.*.crf
+*.uvgui.*.d
+*.uvgui.*.o
+*.uvgui.*.lnp
+*.uvgui.*.sct
+*.uvgui.*.dep
+*.uvgui.*.tra
+*.uvgui.*.plg
+*.uvgui.*.htm
+*.uvgui.*.dep
+*.uvgui.*.bak
+*.uvgui.*.crf
+*.uvgui.*.d
+*.uvgui.*.o
+*.uvgui.*.lnp
+*.uvgui.*.sct
+*.uvgui.*.dep
+*.uvgui.*.tra
+*.uvgui.*.plg
+*.uvgui.*.htm
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Binary files
+*.bin
+*.hex
+*.elf
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Log files
+*.log
+*.txt
+!README.txt
+
+# Dependencies
+*.lib
+*.a
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Keil MDK specific
+*.uvgui.*
+*.uvgui
+*.uvopt
+*.uvoptx
+*.uvproj
+*.uvprojx
+*.uvgui.*.username
+*.uvgui.*.dep
+*.uvgui.*.bak
+*.uvgui.*.crf
+*.uvgui.*.d
+*.uvgui.*.o
+*.uvgui.*.lnp
+*.uvgui.*.sct
+*.uvgui.*.dep
+*.uvgui.*.tra
+*.uvgui.*.plg
+*.uvgui.*.htm
+
+# Launch and project files
+*.launch
+*.si4project/ 
