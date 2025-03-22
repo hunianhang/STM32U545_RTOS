@@ -8,7 +8,7 @@ extern "C" {
 #include "main.h"
 #include "tx_api.h"
 
-/* 函数声明 */
+/* Function Declarations */
 void UART_Task_Init(void);
 void UART_Task_DeInit(void);
 
