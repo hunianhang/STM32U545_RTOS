@@ -1,6 +1,7 @@
 #include "task_manager.h"
 #include "uart_task.h"
 #include "debug.h"
+#include "print_task.h"
 
 /* Private Variables */
 static TX_THREAD task_manager_thread;
@@ -21,8 +22,9 @@ void Task_Manager_Init(void)
 void Task_Manager_Start(void)
 {
     /* Initialize Function Tasks */
-    UART_Task_Init();
+//    UART_Task_Init();
     
+    Print_Task_Init();
     /* Add more task initializations here */
 }
 

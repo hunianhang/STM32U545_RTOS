@@ -10,14 +10,11 @@
 
 /* Private Variables */
 static uint8_t uart_rx_buffer[UART_RX_BUFFER_SIZE];
-//static uint8_t uart_tx_buffer[UART_TX_BUFFER_SIZE];
-static TX_THREAD uart_thread;
 static TX_SEMAPHORE uart_rx_semaphore;
 static TX_THREAD uart_tx_thread;
 static uint8_t uart_tx_stack[UART_TX_STACK_SIZE];
 
 /* Private Function Declarations */
-//static void UART_Thread_Entry(ULONG thread_input);
 static void UART_TX_Thread_Entry(ULONG thread_input);
 
 /* Function Implementations */
@@ -39,10 +36,7 @@ void UART_Task_DeInit(void)
 {
     /* Stop UART Receive Interrupt */
     HAL_UART_AbortReceive_IT(&huart1);
-    
-    /* Delete UART Thread */
-    tx_thread_delete(&uart_thread);
-    
+
     /* Delete UART Receive Semaphore */
     tx_semaphore_delete(&uart_rx_semaphore);
 
