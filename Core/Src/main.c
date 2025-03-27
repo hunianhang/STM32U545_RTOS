@@ -62,15 +62,15 @@ static void SystemPower_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if(huart == &huart1)
-	{
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		u1_flag = 1;
-		HAL_UART_Receive_IT(&huart1, &pData, 1);
-	}
-}
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//	if(huart == &huart1)
+//	{
+//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+//		u1_flag = 1;
+//		HAL_UART_Receive_IT(&huart1, &pData, 1);
+//	}
+//}
 
 /* USER CODE END 0 */
 
@@ -114,7 +114,7 @@ int main(void)
   HAL_UART_Receive_IT(&huart1, &pData, 1);
   /* USER CODE END 2 */
 
-//  MX_ThreadX_Init();
+  MX_ThreadX_Init();
 
   /* We should never get here as control is now taken by the scheduler */
 
@@ -122,11 +122,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(u1_flag == 1)
-	  {
-		  HAL_UART_Transmit(&huart1, (uint8_t*)&pData, 1, 0xffff);
-		  u1_flag = 0;
-	  }
+//	  if(u1_flag == 1)
+//	  {
+//		  HAL_UART_Transmit(&huart1, (uint8_t*)&pData, 1, 0xffff);
+//		  u1_flag = 0;
+//	  }
 
     /* USER CODE END WHILE */
 

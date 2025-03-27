@@ -10,14 +10,14 @@
 
 /* Private Variables */
 static uint8_t uart_rx_buffer[UART_RX_BUFFER_SIZE];
-static uint8_t uart_tx_buffer[UART_TX_BUFFER_SIZE];
+//static uint8_t uart_tx_buffer[UART_TX_BUFFER_SIZE];
 static TX_THREAD uart_thread;
 static TX_SEMAPHORE uart_rx_semaphore;
 static TX_THREAD uart_tx_thread;
 static uint8_t uart_tx_stack[UART_TX_STACK_SIZE];
 
 /* Private Function Declarations */
-static void UART_Thread_Entry(ULONG thread_input);
+//static void UART_Thread_Entry(ULONG thread_input);
 static void UART_TX_Thread_Entry(ULONG thread_input);
 
 /* Function Implementations */
@@ -26,18 +26,13 @@ void UART_Task_Init(void)
     /* Create UART Receive Semaphore */
     tx_semaphore_create(&uart_rx_semaphore, "UART_RX_SEM", 0);
 
-    /* Create UART Thread */
-    tx_thread_create(&uart_thread, "UART_THREAD", UART_Thread_Entry, 0,
-                    uart_tx_buffer, TASK_STACK_SIZE_NORMAL,
-                    TASK_PRIORITY_NORMAL, TASK_PRIORITY_NORMAL, TX_NO_TIME_SLICE, TX_AUTO_START);
-
     /* Start UART Receive Interrupt */
-//    HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
+    HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
 
     /* Create UART TX Thread */
-//    tx_thread_create(&uart_tx_thread, "UART_TX", UART_TX_Thread_Entry, 0,
-//                    uart_tx_stack, UART_TX_STACK_SIZE,
-//                    15, 15, TX_NO_TIME_SLICE, TX_AUTO_START);
+    tx_thread_create(&uart_tx_thread, "UART_TX", UART_TX_Thread_Entry, 0,
+                    uart_tx_stack, UART_TX_STACK_SIZE,
+                    15, 15, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
 void UART_Task_DeInit(void)
@@ -56,19 +51,19 @@ void UART_Task_DeInit(void)
 }
 
 /* UART Receive Interrupt Callback */
-//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-//{
-//    if (huart->Instance == USART1)
-//    {
-//        /* Send Semaphore to Notify Receive Thread */
-//        tx_semaphore_put(&uart_rx_semaphore);
-//        /* Restart Receive Interrupt */
-//        HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
-//    }
-//}
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART1)
+    {
+        /* Send Semaphore to Notify Receive Thread */
+        tx_semaphore_put(&uart_rx_semaphore);
+        /* Restart Receive Interrupt */
+        HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
+    }
+}
 
 /* UART Thread Entry Function */
-static void UART_Thread_Entry(ULONG thread_input)
+static void UART_TX_Thread_Entry(ULONG thread_input)
 {
     uint8_t rx_data;
     uint32_t status;
