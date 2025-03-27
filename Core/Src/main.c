@@ -23,12 +23,11 @@
 #include "memorymap.h"
 #include "usart.h"
 #include "gpio.h"
-#include <stdlib.h>
-#include "debug.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include "debug.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +48,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t pData = 0;
+uint8_t u1_flag = 0;
 
 /* USER CODE END PV */
 
@@ -61,6 +62,15 @@ static void SystemPower_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart == &huart1)
+	{
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+		u1_flag = 1;
+		HAL_UART_Receive_IT(&huart1, &pData, 1);
+	}
+}
 
 /* USER CODE END 0 */
 
@@ -101,9 +111,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
   Debug_Println("System initialized!");
   Debug_Println("UART Test - Baud Rate: 115200");
+  HAL_UART_Receive_IT(&huart1, &pData, 1);
   /* USER CODE END 2 */
 
-  MX_ThreadX_Init();
+//  MX_ThreadX_Init();
 
   /* We should never get here as control is now taken by the scheduler */
 
@@ -111,6 +122,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if(u1_flag == 1)
+	  {
+		  HAL_UART_Transmit(&huart1, (uint8_t*)&pData, 1, 0xffff);
+		  u1_flag = 0;
+	  }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -20,10 +20,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_threadx.h"
-#include "task_manager.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "task_manager.h"
 
 /* USER CODE END Includes */
 

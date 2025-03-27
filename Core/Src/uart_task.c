@@ -24,20 +24,20 @@ static void UART_TX_Thread_Entry(ULONG thread_input);
 void UART_Task_Init(void)
 {
     /* Create UART Receive Semaphore */
-//    tx_semaphore_create(&uart_rx_semaphore, "UART_RX_SEM", 0);
+    tx_semaphore_create(&uart_rx_semaphore, "UART_RX_SEM", 0);
 
     /* Create UART Thread */
-//    tx_thread_create(&uart_thread, "UART_THREAD", UART_Thread_Entry, 0,
-//                    uart_tx_buffer, TASK_STACK_SIZE_NORMAL,
-//                    TASK_PRIORITY_NORMAL, TASK_PRIORITY_NORMAL, TX_NO_TIME_SLICE, TX_AUTO_START);
+    tx_thread_create(&uart_thread, "UART_THREAD", UART_Thread_Entry, 0,
+                    uart_tx_buffer, TASK_STACK_SIZE_NORMAL,
+                    TASK_PRIORITY_NORMAL, TASK_PRIORITY_NORMAL, TX_NO_TIME_SLICE, TX_AUTO_START);
 
     /* Start UART Receive Interrupt */
 //    HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
 
     /* Create UART TX Thread */
-    tx_thread_create(&uart_tx_thread, "UART_TX", UART_TX_Thread_Entry, 0,
-                    uart_tx_stack, UART_TX_STACK_SIZE,
-                    15, 15, TX_NO_TIME_SLICE, TX_AUTO_START);
+//    tx_thread_create(&uart_tx_thread, "UART_TX", UART_TX_Thread_Entry, 0,
+//                    uart_tx_stack, UART_TX_STACK_SIZE,
+//                    15, 15, TX_NO_TIME_SLICE, TX_AUTO_START);
 }
 
 void UART_Task_DeInit(void)
@@ -56,16 +56,16 @@ void UART_Task_DeInit(void)
 }
 
 /* UART Receive Interrupt Callback */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1)
-    {
-        /* Send Semaphore to Notify Receive Thread */
-        tx_semaphore_put(&uart_rx_semaphore);
-        /* Restart Receive Interrupt */
-        HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
-    }
-}
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//    if (huart->Instance == USART1)
+//    {
+//        /* Send Semaphore to Notify Receive Thread */
+//        tx_semaphore_put(&uart_rx_semaphore);
+//        /* Restart Receive Interrupt */
+//        HAL_UART_Receive_IT(&huart1, uart_rx_buffer, 1);
+//    }
+//}
 
 /* UART Thread Entry Function */
 static void UART_Thread_Entry(ULONG thread_input)
@@ -88,23 +88,5 @@ static void UART_Thread_Entry(ULONG thread_input)
             /* Send Data */
             HAL_UART_Transmit(&huart1, &rx_data, 1, HAL_MAX_DELAY);
         }
-    }
-}
-
-/* UART TX Thread Entry Function */
-static void UART_TX_Thread_Entry(ULONG thread_input)
-{
-    uint8_t tx_data = 0;
-    while (1)
-    {
-        /* Send data through UART */
-        HAL_UART_Transmit(&huart1, &tx_data, 1, HAL_MAX_DELAY);
-        /* Print debug message */
-        Debug_Println("Sent: %d", tx_data);
-        /* Increment data */
-        tx_data++;
-
-        /* Wait for 1 second */
-        tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND);
     }
 }
