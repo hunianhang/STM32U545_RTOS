@@ -79,6 +79,7 @@ static void UART_TX_Thread_Entry(ULONG thread_input)
             
             /* Echo Received Data */
             Debug_Println("Received: %c", rx_data);
+            HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
             
             /* Send Data */
             HAL_UART_Transmit(&huart1, &rx_data, 1, HAL_MAX_DELAY);
