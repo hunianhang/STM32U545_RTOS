@@ -20,8 +20,8 @@ static TX_THREAD my_thread_2;
 static uint8_t thread1_stack[thread1_STACK_SIZE];
 static uint8_t thread2_stack[thread2_STACK_SIZE];
 
-static uint8_t pData1[] = "I am thread1";
-static uint8_t pData2[] = "I am thread2";
+//static uint8_t pData1[] = "I am thread1";
+//static uint8_t pData2[] = "I am thread2";
 
 static void thread1_entry(ULONG entry_input);
 static void thread2_entry(ULONG entry_input);

@@ -24,7 +24,8 @@ void Task_Manager_Start(void)
     /* Initialize Function Tasks */
 //    UART_Task_Init();
     
-    Print_Task_Init();
+//    Print_Task_Init();
+	Threadx_Task_Func_Test_Init();
     /* Add more task initializations here */
 }
 
