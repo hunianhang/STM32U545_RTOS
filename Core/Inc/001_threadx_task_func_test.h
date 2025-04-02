@@ -7,7 +7,8 @@
 
 #ifndef INC_001_THREADX_TASK_FUNC_TEST_H_
 #define INC_001_THREADX_TASK_FUNC_TEST_H_
+#include "tx_port.h"
 
-void Threadx_Task_Func_Test_Init(void);
+UINT Threadx_Task_Func_Test_Init(void);
 
 #endif /* INC_001_THREADX_TASK_FUNC_TEST_H_ */

@@ -36,8 +36,8 @@ void Print_Task_Init(void)
 			0,
 			thread1_stack,
 			thread1_STACK_SIZE,
-			3,
-			3,
+			2,
+			2,
 			TX_NO_TIME_SLICE,
 			TX_AUTO_START
 			);
@@ -63,7 +63,7 @@ static void thread1_entry(ULONG entry_input)
 	{
 		Debug_Println("Hello thread 1");
 //		HAL_UART_Transmit(&huart1, pData1, sizeof(pData1), HAL_MAX_DELAY);
-		tx_thread_sleep(1000);
+		tx_thread_sleep(2000);
 	}
 
 }
@@ -74,7 +74,7 @@ static void thread2_entry(ULONG entry_input)
 	{
 		Debug_Println("Hello thread 2");
 //		HAL_UART_Transmit(&huart1, pData2, sizeof(pData2), HAL_MAX_DELAY);
-		tx_thread_sleep(500);
+		tx_thread_sleep(2000);
 	}
 }
 
