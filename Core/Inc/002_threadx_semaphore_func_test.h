@@ -10,6 +10,7 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Semaphore_Func_Test(void);
+void Semaphore_Func_Test_Buffer(void);
 
 #ifdef __cplusplus
 }
