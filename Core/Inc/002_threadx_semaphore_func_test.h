@@ -11,6 +11,7 @@ extern "C" {
 /* Exported functions prototypes ---------------------------------------------*/
 void Semaphore_Func_Test(void);
 void Semaphore_Func_Test_Buffer(void);
+void Semaphore_Func_Test_MultThreads(void);
 
 #ifdef __cplusplus
 }
