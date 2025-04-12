@@ -2,6 +2,7 @@
 #include "uart_task.h"
 #include "debug.h"
 #include "print_task.h"
+#include "002_threadx_semaphore_func_test.h"
 
 /* Private Variables */
 static TX_THREAD task_manager_thread;
@@ -25,7 +26,8 @@ void Task_Manager_Start(void)
 //    UART_Task_Init();
     
 //    Print_Task_Init();
-	Threadx_Task_Func_Test_Init();
+//	Threadx_Task_Func_Test_Init();
+	Semaphore_Func_Test();
     /* Add more task initializations here */
 }
 

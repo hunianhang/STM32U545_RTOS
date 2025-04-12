@@ -121,6 +121,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
+	  HAL_Delay(1000);
 //	  if(u1_flag == 1)
 //	  {
 //		  HAL_UART_Transmit(&huart1, (uint8_t*)&pData, 1, 0xffff);
