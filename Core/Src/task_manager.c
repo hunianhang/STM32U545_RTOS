@@ -29,7 +29,8 @@ void Task_Manager_Start(void)
 //	Threadx_Task_Func_Test_Init();
 //	Semaphore_Func_Test();
 //	Semaphore_Func_Test_Buffer();
-	Semaphore_Func_Test_MultThreads();
+//	Semaphore_Func_Test_MultThreads();
+	ISR_Simulation_Test();
     /* Add more task initializations here */
 }
 

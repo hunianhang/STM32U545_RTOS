@@ -12,6 +12,7 @@ extern "C" {
 void Semaphore_Func_Test(void);
 void Semaphore_Func_Test_Buffer(void);
 void Semaphore_Func_Test_MultThreads(void);
+void ISR_Simulation_Test(void);
 
 #ifdef __cplusplus
 }
